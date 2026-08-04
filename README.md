@@ -108,13 +108,14 @@ The workflow classifies each lead, scores buying intent, detects insurance claim
 
 ### 🤖 AI Sales Notes
 
-The AI prepares the sales representative by generating:
+The AI generates call preparation notes including:
 
-- A concise summary
-- Likely customer concerns
+- Summary
+- Likely customer concern
 - Questions to ask
 - Inspection checklist
 - Possible upsells
+- Objections to expect
 - Next best action
 
 <img width="872" height="613" alt="Sales notes 1" src="https://github.com/user-attachments/assets/3f7849c0-7a9e-4b99-98e1-8d4527d9e4c7" />
