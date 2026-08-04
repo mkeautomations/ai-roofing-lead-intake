@@ -2,14 +2,55 @@
 
 An end-to-end AI-powered lead intake and qualification system built with **n8n**, **OpenAI**, **Gmail**, and **Google Sheets**.
 
-The workflow automatically:
+## About
 
-- Collects roofing estimate requests
-- Uses AI to analyze and score leads
-- Detects emergency jobs
-- Generates AI sales notes
-- Sends professional email notifications
-- Logs every lead into Google Sheets
+Small roofing companies often spend valuable time qualifying leads manually.
+
+This workflow automates that process by using AI to analyze every incoming request, prioritize emergency jobs, generate sales notes, notify the business owner, and log the lead into a lightweight CRM.
+
+The goal is to reduce response time, improve lead qualification, and help roofing businesses focus on the highest-value opportunities.
+
+## AI Outputs
+
+Each submission is enriched with:
+
+- 10 structured AI fields
+- AI-generated sales notes
+- AI-generated customer email
+- Emergency classification
+- Automatic CRM entry
+
+## Architecture
+
+```text
+Customer Form
+      │
+      ▼
+Company Settings
+      │
+      ▼
+Lead ID
+      │
+      ▼
+AI Analysis
+      │
+      ▼
+AI Sales Notes
+      │
+      ▼
+Emergency Detection
+      │
+ ┌────┴────┐
+ ▼         ▼
+Emergency  Owner
+ Email      Email
+      │
+      ▼
+Google Sheets
+      │
+      ▼
+Customer Confirmation
+```
 
 ## Tech Stack
 
@@ -21,23 +62,31 @@ The workflow automatically:
 
 ![Gmail](https://img.shields.io/badge/Gmail-API-red)
 
-Customer Form
-      ↓
-Company Settings
-      ↓
-Lead ID
-      ↓
-AI Analysis
-      ↓
-AI Sales Notes
-      ↓
-Emergency Detection
-      ↓
-Owner Email
-      ↓
-Google Sheets
-      ↓
-Customer Confirmation
+## Demo
+
+Example workflow:
+
+Customer submits a roofing request
+
+↓
+
+AI analyzes urgency and lead quality
+
+↓
+
+Emergency leads are prioritized automatically
+
+↓
+
+Owner receives a detailed AI-generated report
+
+↓
+
+Customer receives a confirmation email
+
+↓
+
+Lead is stored in Google Sheets
 
 ## Workflow Overview
 <img width="1356" height="409" alt="Screenshot 2026-08-03 211919" src="https://github.com/user-attachments/assets/f49a49c2-7591-4244-979c-f4d31e26f5fb" />
@@ -45,19 +94,9 @@ Customer Confirmation
 
 <img width="877" height="902" alt="Customer Form" src="https://github.com/user-attachments/assets/7f945194-4530-4ecf-b67c-d6e65614ece6" />
 
-🧠 AI Analysis
+### 🧠 AI Analysis
 
-The AI automatically extracts:
-
-- Lead summary
-- Job type
-- Urgency
-- Lead score
-- Insurance claim detection
-- Estimated project value
-- Customer sentiment
-- Best contact method
-- Recommended next action
+The workflow classifies each lead, scores buying intent, detects insurance claims, estimates project value, and recommends the next action.
 
 <img width="910" height="597" alt="AI emergency " src="https://github.com/user-attachments/assets/7faa3499-3205-4454-9edf-13216a40862c" />
 
@@ -128,3 +167,9 @@ This creates a searchable lead database for the business.
 - CRM dashboard
 - Weekly AI reports
 - Multi-industry support
+
+- ## Conclusion
+
+This project demonstrates how AI can automate lead qualification and customer communication for service-based businesses.
+
+While designed for roofing contractors, the workflow can be adapted for HVAC, plumbing, electrical, landscaping, and other home service industries by updating the Company Settings node and AI prompts.
