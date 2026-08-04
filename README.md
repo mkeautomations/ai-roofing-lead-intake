@@ -58,7 +58,7 @@ Customer Confirmation
 ```
 
 ## Tech Stack
-
+Built using n8n for workflow automation, OpenAI for AI-powered analysis, Gmail for email notifications, and Google Sheets as a lightweight CRM.
 ![n8n](https://img.shields.io/badge/n8n-Automation-orange)
 
 ![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4.1--mini-green)
@@ -105,7 +105,16 @@ The workflow classifies each lead, scores buying intent, detects insurance claim
 
 <img width="910" height="597" alt="AI emergency " src="https://github.com/user-attachments/assets/7faa3499-3205-4454-9edf-13216a40862c" />
 
-🤖 AI Sales Notes
+### 🤖 AI Sales Notes
+
+The AI prepares the sales representative by generating:
+
+- A concise summary
+- Likely customer concerns
+- Questions to ask
+- Inspection checklist
+- Possible upsells
+- Next best action
 
 <img width="872" height="613" alt="Sales notes 1" src="https://github.com/user-attachments/assets/3f7849c0-7a9e-4b99-98e1-8d4527d9e4c7" />
 <img width="938" height="464" alt="Screenshot 2026-08-03 213652" src="https://github.com/user-attachments/assets/ef3d897b-91fd-4d54-95ba-82f4039e2084" />
