@@ -56,7 +56,8 @@ Emergency leads trigger:
 
 📧 Owner Notification
 
-↓
+<img width="1528" height="769" alt="Screenshot 2026-08-03 215711" src="https://github.com/user-attachments/assets/e0b47603-e292-499e-989f-7e0563f5fa95" />
+
 
 📋 Google Sheets CRM
 
