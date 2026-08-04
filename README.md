@@ -4,14 +4,19 @@ An end-to-end AI-powered lead intake and qualification system built with **n8n**
 
 ## About
 
-Small roofing companies often spend valuable time qualifying leads manually.
+Small roofing companies often spend valuable time manually reviewing incoming leads and determining which jobs need immediate attention.
 
-This workflow automates that process by using AI to analyze every incoming request, prioritize emergency jobs, generate sales notes, notify the business owner, and log the lead into a lightweight CRM.
+This workflow automates that process by using AI to:
 
-The goal is to reduce response time, improve lead qualification, and help roofing businesses focus on the highest-value opportunities.
+- Analyze customer requests
+- Score lead quality
+- Detect emergency jobs
+- Generate sales notes
+- Notify the business owner
+- Send a customer confirmation email
+- Log every lead into Google Sheets
 
-## AI Outputs
-
+The result is faster response times, better lead organization, and a more consistent customer experience.
 Each submission is enriched with:
 
 - 10 structured AI fields
@@ -126,7 +131,16 @@ Emergency leads trigger:
 
 
 
-📧 Owner Notification
+### 📧 Owner Notification
+
+The business owner receives a professional email containing:
+
+- AI lead summary
+- Lead score
+- Urgency
+- Customer information
+- AI-generated sales notes
+- Recommended next action
 
 <img width="1508" height="426" alt="Email" src="https://github.com/user-attachments/assets/98a43f6a-7ef7-479e-90b7-4defa6b7d936" />
 <img width="1265" height="367" alt="custo info" src="https://github.com/user-attachments/assets/abb25513-febd-4fee-86a3-02f73f121930" />
@@ -168,8 +182,8 @@ This creates a searchable lead database for the business.
 - Weekly AI reports
 - Multi-industry support
 
-- ## Conclusion
+## Conclusion
 
-This project demonstrates how AI can automate lead qualification and customer communication for service-based businesses.
+This project demonstrates how AI and workflow automation can streamline lead management for service-based businesses.
 
-While designed for roofing contractors, the workflow can be adapted for HVAC, plumbing, electrical, landscaping, and other home service industries by updating the Company Settings node and AI prompts.
+Although built for roofing contractors, the architecture can be adapted to HVAC, plumbing, electrical, landscaping, and other home service industries by updating the Company Settings node and AI prompts.
