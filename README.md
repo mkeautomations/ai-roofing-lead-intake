@@ -19,7 +19,7 @@ An AI-powered roofing lead qualification system built with n8n OpenAI, Gmail, an
 - Google Sheets API
 
 ## Workflow Overview
-
+<img width="1356" height="409" alt="Screenshot 2026-08-03 211919" src="https://github.com/user-attachments/assets/f49a49c2-7591-4244-979c-f4d31e26f5fb" />
 📥 Lead Submission
 
 ↓
