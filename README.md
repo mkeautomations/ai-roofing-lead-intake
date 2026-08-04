@@ -59,6 +59,7 @@ Customer Confirmation
 
 ## Tech Stack
 Built using n8n for workflow automation, OpenAI for AI-powered analysis, Gmail for email notifications, and Google Sheets as a lightweight CRM.
+
 ![n8n](https://img.shields.io/badge/n8n-Automation-orange)
 
 ![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4.1--mini-green)
