@@ -48,7 +48,6 @@ Emergency leads trigger:
 - 🚨 Priority owner email
 - AI-generated action plan
 - Immediate customer contact recommendation
-<img width="938" height="464" alt="Screenshot 2026-08-03 213652" src="https://github.com/user-attachments/assets/673497bf-ec88-4c1d-b0a6-0e8c97b3a10d" />
 <img width="782" height="417" alt="Emergency code" src="https://github.com/user-attachments/assets/7c961d58-661b-4297-882c-ecea0452e973" />
 <img width="527" height="437" alt="Emergency json" src="https://github.com/user-attachments/assets/5cd6e5d0-db2e-4058-bdb1-782b2fe68505" />
 <img width="1025" height="568" alt="Screenshot 2026-08-03 214857" src="https://github.com/user-attachments/assets/75a9f9e4-dede-4061-948a-c5fa09bd373c" />
