@@ -47,6 +47,18 @@ Customer Confirmation
 
 🧠 AI Analysis
 
+The AI automatically extracts:
+
+- Lead summary
+- Job type
+- Urgency
+- Lead score
+- Insurance claim detection
+- Estimated project value
+- Customer sentiment
+- Best contact method
+- Recommended next action
+
 <img width="910" height="597" alt="AI emergency " src="https://github.com/user-attachments/assets/7faa3499-3205-4454-9edf-13216a40862c" />
 
 🤖 AI Sales Notes
@@ -99,3 +111,20 @@ This creates a searchable lead database for the business.
 
 📨 Customer Confirmation
 <img width="1516" height="442" alt="Screenshot 2026-08-03 220631" src="https://github.com/user-attachments/assets/be2589c7-d407-4428-b29d-3f9d34d5cc25" />
+
+## Setup
+
+1. Import the workflow into n8n.
+2. Configure your OpenAI API credentials.
+3. Configure Gmail OAuth.
+4. Connect Google Sheets.
+5. Update the Company Settings node.
+6. Publish the form.
+
+## Roadmap
+
+- SMS notifications
+- Calendar scheduling
+- CRM dashboard
+- Weekly AI reports
+- Multi-industry support
