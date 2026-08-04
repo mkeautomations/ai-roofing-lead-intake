@@ -60,9 +60,21 @@ Emergency leads trigger:
 <img width="1265" height="367" alt="custo info" src="https://github.com/user-attachments/assets/abb25513-febd-4fee-86a3-02f73f121930" />
 
 
+### 📊 Lead Tracking
 
-📋 Google Sheets CRM
+Every submission is automatically logged to Google Sheets with:
 
-↓
+- Customer information
+- AI lead analysis
+- Urgency
+- Lead score
+- Project value
+- Customer sentiment
+- Recommended action
+
+This creates a searchable lead database for the business.
+↓<img width="1897" height="412" alt="Screenshot 2026-08-03 222207" src="https://github.com/user-attachments/assets/f3e80910-e85e-42ea-8e7f-55421f5f0a49" />
+
 
 📨 Customer Confirmation
+<img width="1516" height="442" alt="Screenshot 2026-08-03 220631" src="https://github.com/user-attachments/assets/be2589c7-d407-4428-b29d-3f9d34d5cc25" />
