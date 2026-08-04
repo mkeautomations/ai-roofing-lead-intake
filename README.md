@@ -1,22 +1,43 @@
-# ai-roofing-lead-intake
-An AI-powered roofing lead qualification system built with n8n OpenAI, Gmail, and Google Sheets.
+# 🏠 AI Roofing Office Assistant
 
-## Features
+An end-to-end AI-powered lead intake and qualification system built with **n8n**, **OpenAI**, **Gmail**, and **Google Sheets**.
 
-- AI lead qualification
-- Emergency lead routing
-- AI-generated sales notes
-- Customer confirmation emails
-- Owner notifications
-- Google Sheets CRM logging
-- Company Settings node for easy customization
+The workflow automatically:
+
+- Collects roofing estimate requests
+- Uses AI to analyze and score leads
+- Detects emergency jobs
+- Generates AI sales notes
+- Sends professional email notifications
+- Logs every lead into Google Sheets
 
 ## Tech Stack
 
-- n8n
-- OpenAI
-- Gmail API
-- Google Sheets API
+![n8n](https://img.shields.io/badge/n8n-Automation-orange)
+
+![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4.1--mini-green)
+
+![Google Sheets](https://img.shields.io/badge/Google-Sheets-brightgreen)
+
+![Gmail](https://img.shields.io/badge/Gmail-API-red)
+
+Customer Form
+      ↓
+Company Settings
+      ↓
+Lead ID
+      ↓
+AI Analysis
+      ↓
+AI Sales Notes
+      ↓
+Emergency Detection
+      ↓
+Owner Email
+      ↓
+Google Sheets
+      ↓
+Customer Confirmation
 
 ## Workflow Overview
 <img width="1356" height="409" alt="Screenshot 2026-08-03 211919" src="https://github.com/user-attachments/assets/f49a49c2-7591-4244-979c-f4d31e26f5fb" />
