@@ -1,0 +1,841 @@
+{
+  "name": "Template",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Requesting a Roofing Estimate ",
+        "formDescription": "Tell us about your roofing issue or project, and our team will review your request and contact you with a personalized estimate as soon as possible.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Full Name",
+              "fieldName": "name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "fieldName": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Phone",
+              "fieldName": "phone"
+            },
+            {
+              "fieldLabel": "Service Address",
+              "fieldName": "address"
+            },
+            {
+              "fieldLabel": "What do you need help with?",
+              "fieldType": "dropdown",
+              "fieldName": "service_type",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Roof Repair"
+                  },
+                  {
+                    "option": "Roof Replacement"
+                  },
+                  {
+                    "option": "Storm Damage"
+                  },
+                  {
+                    "option": "Leak Inspection"
+                  },
+                  {
+                    "option": "Gutter Repair"
+                  },
+                  {
+                    "option": "Commercial Roofing"
+                  },
+                  {
+                    "option": "Emergency Roofing"
+                  },
+                  {
+                    "option": "Not Sure"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Describe your request",
+              "fieldType": "textarea",
+              "fieldName": "details",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Best time to reach you ",
+              "fieldType": "dropdown",
+              "fieldName": "best_time",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Morning (8AM-12PM)"
+                  },
+                  {
+                    "option": "Afternoon (12PM-4PM)"
+                  },
+                  {
+                    "option": "Evening (4PM-7PM)"
+                  },
+                  {
+                    "option": "Anytime"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {
+          "path": "roofing-quote",
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "Thanks! Your quote request has been received. Our team will reach out shortly."
+            }
+          }
+        }
+      },
+      "id": "1109fd39-f758-467e-bb21-208ac83ddadb",
+      "name": "Quote Request Form",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        -1280,
+        96
+      ],
+      "webhookId": "b9bcd013-e10e-4972-b680-5611e09c37b6"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "id"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=You are the AI office assistant for a professional roofing company.\n\nAnalyze the customer's request and determine:\n\n• A concise 2–3 sentence summary for the office.\n• The most appropriate job type.\n• The urgency (High, Medium, or Low).\n• A lead score from 1–100.\n• Whether an estimate is being requested.\n• Whether an insurance claim is likely.\n• Estimated project value (Low, Medium, High).\n• Customer sentiment (Calm, Concerned, Urgent).\n• Ideal first contact method (Phone or Email).\n• The best next action for the office.\n\nScoring Rules\n\nHIGH URGENCY\n- Active roof leak\n- Water entering the home\n- Storm, hail or wind damage\n- Tree on roof\n- Roof collapse\n- Emergency tarp request\n- Immediate service requested\n\nMEDIUM URGENCY\n- Roof repair\n- Missing shingles\n- Flashing damage\n- Small leak\n- Gutter issues\n- Ventilation problems\n\nLOW URGENCY\n- Routine inspection\n- Maintenance\n- Future roof replacement\n- General questions\n- Pricing inquiry\n\nLead Score\n\n90–100\nEmergency jobs, storm damage, insurance claims, full replacements, immediate scheduling.\n\n70–89\nRoof repairs, inspections, leaks, customers ready to schedule.\n\n40–69\nGeneral estimates and maintenance.\n\n1–39\nInformational questions only.\n\nEstimated Project Value\n\nHigh\n- Full roof replacement\n- Major storm damage\n- Commercial roofing\n\nMedium\n- Roof repairs\n- Leak repairs\n- Gutters\n\nLow\n- Inspection\n- Maintenance\n- Consultation\n\nCustomer Sentiment\n\nUrgent\n- Wants immediate help\n- Water entering home\n- Emergency\n\nConcerned\n- Worried about damage\n- Wants an estimate soon\n\nCalm\n- General inquiry\n- Planning ahead\n\nRecommended Action should be one short sentence.\n\nCustomer Information\n\nName:\n{{ $json.name }}\n\nSelected Service:\n{{ $json.service_type }}\n\nCustomer Description:\n{{ $json.details }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "instructions": "You are an AI assistant for a professional roofing company. Read the customer's roofing request and produce a concise 2-3 sentence summary for the business owner, a job_type classification, an urgency estimate, a lead_score from 1 to 100 (integer), a recommended_action, and estimate_requested (true/false). Set estimate_requested to true when the customer is requesting an estimate, quote, inspection, roof replacement, roof repair, insurance inspection, pricing, or wants to schedule a visit. Set it to false for general questions or informational inquiries. Base urgency on the following: High for active roof leaks, storm or hail damage, trees on roofs, roof collapses, water entering the home, emergency tarp requests, or requests for immediate service. Medium for missing shingles, flashing damage, roof repairs, small leaks, gutter issues, or ventilation problems. Low for routine inspections, future roof replacements, preventative maintenance, pricing inquiries, or general questions. Lead_score should reflect how valuable and ready-to-buy the lead is: 90-100 for emergency service, severe storm damage, insurance claims, or full roof replacements needing immediate attention; 70-89 for roof repairs, inspections, and customers ready to schedule; 40-69 for general estimate requests or maintenance; 1-39 for informational inquiries or customers not ready to move forward. Recommended_action should be one short instruction such as \"Call immediately and dispatch an emergency crew,\" \"Schedule a roof inspection within 24 hours,\" \"Contact the customer today with an estimate,\" or \"Email pricing information.\" Set insurance_claim to true if the customer mentions insurance, hail damage, storm damage, wind damage, filing a claim, or says they plan to use home owners insurance. otherwise set to false. Always return valid JSON that matches the provided schema exactly.",
+          "textFormat": {
+            "textOptions": {
+              "type": "json_schema",
+              "name": "roofing_lead_analysis",
+              "schema": "={\n  \"type\": \"object\",\n  \"additionalProperties\": false,\n  \"properties\": {\n    \"summary\": {\n      \"type\": \"string\"\n    },\n    \"job_type\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Roof Repair\",\n        \"Roof Replacement\",\n        \"Storm Damage\",\n        \"Leak Repair\",\n        \"Roof Inspection\",\n        \"Gutter Repair\",\n        \"Commercial Roofing\",\n        \"Other\"\n      ]\n    },\n    \"urgency\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"High\",\n        \"Medium\",\n        \"Low\"\n      ]\n    },\n    \"lead_score\": {\n      \"type\": \"integer\",\n      \"minimum\": 1,\n      \"maximum\": 100\n    },\n    \"recommended_action\": {\n      \"type\": \"string\"\n    },\n    \"estimate_requested\": {\n      \"type\": \"boolean\"\n    },\n    \"insurance_claim\": {\n      \"type\": \"boolean\"\n    },\n    \"estimated_project_value\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Low\",\n        \"Medium\",\n        \"High\"\n      ]\n    },\n    \"customer_sentiment\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Calm\",\n        \"Concerned\",\n        \"Urgent\"\n      ]\n    },\n    \"ideal_contact_method\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Phone\",\n        \"Email\"\n      ]\n    }\n  },\n  \"required\": [\n    \"summary\",\n    \"job_type\",\n    \"urgency\",\n    \"lead_score\",\n    \"recommended_action\",\n    \"estimate_requested\",\n    \"insurance_claim\",\n    \"estimated_project_value\",\n    \"customer_sentiment\",\n    \"ideal_contact_method\"\n  ]\n}",
+              "description": "Analyzes roofing lead submissions and returns structured data including a summary, job type, urgency, lead score, recommended action, estimate request status, and insurance claim detection.",
+              "strict": true
+            }
+          }
+        }
+      },
+      "id": "9bad3765-14b7-4381-8a45-40b39491350d",
+      "name": "Analyze Request",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        -800,
+        96
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "aeehWshP5qvZ5lH7",
+          "name": "OpenAI account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $(\"Company Settings\").item.json.owner_email }}",
+        "subject": "=New Roofing lead [{{ $(\"Analyze Request\").item.json.output[0].content[0].text.urgency }} urgency] - {{ $(\"Quote Request Form\").item.json.name }}",
+        "message": "=<div style=\"background:#1976d2;color:white;padding:18px;text-align:center;font-size:24px;font-weight:bold;\">\n🏠 New Roofing Lead\n</div>\n\n<div style=\"padding:20px;font-family:Arial,sans-serif;max-width:700px;\">\n\n<p style=\"font-size:16px;\">\n<strong>Lead ID:</strong> {{ $(\"Edit Fields\").item.json.lead_id }}\n</p>\n\n<hr>\n\n<h2 style=\"color:#1976d2;\">📊 AI Lead Analysis</h2>\n\n<table width=\"100%\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;border:1px solid #ddd;\">\n\n<tr>\n<td width=\"35%\"><strong>Summary</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.summary }}</td>\n</tr>\n\n<tr>\n<td><strong>Job Type</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.job_type }}</td>\n</tr>\n\n<tr>\n<td><strong>Urgency</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.urgency }}</td>\n</tr>\n\n<tr>\n<td><strong>Lead Score</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.lead_score }}/100</td>\n</tr>\n\n<tr>\n<td><strong>Insurance Claim</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.insurance_claim ? \"✅ Yes\" : \"❌ No\" }}</td>\n</tr>\n\n<tr>\n<td><strong>Estimated Project Value</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.estimated_project_value }}</td>\n</tr>\n\n<tr>\n<td><strong>Customer Sentiment</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.customer_sentiment }}</td>\n</tr>\n\n<tr>\n<td><strong>Best Contact Method</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.ideal_contact_method }}</td>\n</tr>\n\n<tr>\n<td><strong>Recommended Action</strong></td>\n<td><strong>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.recommended_action }}</strong></td>\n</tr>\n\n</table>\n\n<br>\n\n<h2 style=\"color:#1976d2;\">👤 Customer Information</h2>\n\n<table width=\"100%\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;border:1px solid #ddd;\">\n\n<tr>\n<td width=\"35%\"><strong>Name</strong></td>\n<td>{{ $(\"Quote Request Form\").item.json.name }}</td>\n</tr>\n\n<tr>\n<td><strong>Email</strong></td>\n<td>\n<a href=\"mailto:{{ $(\"Quote Request Form\").item.json.email }}\">\n{{ $(\"Quote Request Form\").item.json.email }}\n</a>\n</td>\n</tr>\n\n<tr>\n<td><strong>Phone</strong></td>\n<td>\n<a href=\"tel:{{ $(\"Quote Request Form\").item.json.phone }}\">\n{{ $(\"Quote Request Form\").item.json.phone }}\n</a>\n</td>\n</tr>\n\n<tr>\n<td><strong>Best Time</strong></td>\n<td>{{ $(\"Quote Request Form\").item.json.best_time }}</td>\n</tr>\n\n<tr>\n<td><strong>Address</strong></td>\n<td>{{ $(\"Quote Request Form\").item.json.address }}</td>\n</tr>\n\n<tr>\n<td><strong>Requested Service</strong></td>\n<td>{{ $(\"Quote Request Form\").item.json.service_type }}</td>\n</tr>\n\n</table>\n\n<br>\n\n<h2 style=\"color:#1976d2;\">📝 Customer Notes</h2>\n\n<div style=\"background:#f7f7f7;padding:15px;border-left:4px solid #1976d2;\">\n{{ $(\"Quote Request Form\").item.json.details }}\n</div>\n\n<br>\n\n<h2 style=\"color:#1976d2;\">🤖 AI Sales Notes</h2>\n\n<div style=\"background:#f7f7f7;padding:15px;border-left:4px solid #1976d2;\">\n<pre style=\"white-space:pre-wrap;font-family:Arial,sans-serif;margin:0;\">{{ $(\"AI Sales Notes\").item.json.output[0].content[0].text }}</pre>\n</div>\n\n<br>\n\n<div style=\"background:#e8f5e9;padding:15px;border-radius:6px;text-align:center;\">\n<strong>Open Google Sheets to update the lead status after contacting the customer.</strong>\n</div>\n\n</div>",
+        "options": {
+          "replyTo": "={{ $(\"Quote Request Form\").item.json.email }}"
+        }
+      },
+      "id": "d8deaf92-6b1b-4819-bc05-22701da4c195",
+      "name": "Email Owner",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -176,
+        272
+      ],
+      "webhookId": "d46e8db7-85ec-4ba6-84c4-13a8c85cb694",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "xNeh74tInRRKlCYS",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "1-xBU6opbOOiMk1xXd0tKctRsC5N-6mwrnUXaWp5vAlo",
+          "cachedResultName": "n8n test",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-xBU6opbOOiMk1xXd0tKctRsC5N-6mwrnUXaWp5vAlo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "url",
+          "value": "https://docs.google.com/spreadsheets/d/1-xBU6opbOOiMk1xXd0tKctRsC5N-6mwrnUXaWp5vAlo/edit?gid=0#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "submitted_at": "={{ $(\"Quote Request Form\").item.json.submittedAt }}",
+            "name": "={{ $(\"Quote Request Form\").item.json.name }}",
+            "email": "={{ $(\"Quote Request Form\").item.json.email }}",
+            "phone": "={{ $(\"Quote Request Form\").item.json.phone }}",
+            "address": "={{ $(\"Quote Request Form\").item.json.address }}",
+            "service_type": "={{ $(\"Quote Request Form\").item.json.service_type }}",
+            "details": "={{ $(\"Quote Request Form\").item.json.details }}",
+            "summary": "={{ $(\"Analyze Request\").item.json.output[0].content[0].text.summary }}",
+            "job_type": "={{ $(\"Analyze Request\").item.json.output[0].content[0].text.job_type }}",
+            "urgency": "={{ $(\"Analyze Request\").item.json.output[0].content[0].text.urgency }}",
+            "lead_score": "={{ $(\"Analyze Request\").item.json.output[0].content[0].text.lead_score }}",
+            "recommended_action": "={{ $(\"Analyze Request\").item.json.output[0].content[0].text.recommended_action }}",
+            "insurance_claim": "={{ $(\"Analyze Request\").item.json.output[0].content[0].text.insurance_claim }}",
+            "best_time": "={{ $(\"Quote Request Form\").item.json.best_time }}",
+            "lead_id": "={{ $(\"Edit Fields\").item.json.lead_id }}",
+            "estimated_project_value": "={{ $(\"Analyze Request\").item.json.output[0].content[0].text.estimated_project_value }}",
+            "customer_sentiment": "={{ $(\"Analyze Request\").item.json.output[0].content[0].text.customer_sentiment }}",
+            "ideal_contact_method": "={{ $(\"Analyze Request\").item.json.output[0].content[0].text.ideal_contact_method }}",
+            "estimate_requested": "={{ $(\"Analyze Request\").item.json.output[0].content[0].text.estimate_requested }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "submitted_at",
+              "displayName": "submitted_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "address",
+              "displayName": "address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "service_type",
+              "displayName": "service_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "details",
+              "displayName": "details",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "job_type",
+              "displayName": "job_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "urgency",
+              "displayName": "urgency",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "lead_score",
+              "displayName": "lead_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "recommended_action",
+              "displayName": "recommended_action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "insurance_claim",
+              "displayName": "insurance_claim",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "best_time",
+              "displayName": "best_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "lead_id",
+              "displayName": "lead_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "estimated_project_value",
+              "displayName": "estimated_project_value",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "customer_sentiment",
+              "displayName": "customer_sentiment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ideal_contact_method",
+              "displayName": "ideal_contact_method",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "estimate_requested",
+              "displayName": "estimate_requested",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "e3058915-44af-4dbe-b108-11a6635a7b66",
+      "name": "Log Lead",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        320,
+        80
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "WkdB66WOVdqeQptD",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $(\"Quote Request Form\").item.json.email }}",
+        "subject": "=We received your Roofing Estimate request, {{ $(\"Quote Request Form\").item.json.name }}",
+        "message": "=<p>Hi {{ $(\"Quote Request Form\").item.json.name.split(\" \")[0] }},</p>\n\n<p>{{ $(\"AI Follow-up Email\").item.json.output[0].content[0].text }}</p>\n\n<p>\nBest regards,<br>\n{{ $(\"Company Settings\").item.json.company_signature }}\n</p>",
+        "options": {
+          "replyTo": "={{ $(\"Company Settings\").item.json.reply_to }}"
+        }
+      },
+      "id": "33f3854b-c6f1-4772-9939-c947b9d3b110",
+      "name": "Confirm to Customer",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        576,
+        80
+      ],
+      "webhookId": "cfabcdda-a7f7-4f22-b900-47bddbf9d914",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "xNeh74tInRRKlCYS",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2f9ba6e1-f2f0-4682-8233-6c15c3076635",
+              "leftValue": "={{ $(\"Analyze Request\").item.json.output[0].content[0].text.urgency }}",
+              "rightValue": "High",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "1c753c2f-94ef-4e81-9f8e-94bfcfbb90ed",
+              "leftValue": "={{ Number($(\"Analyze Request\").item.json.output[0].content[0].text.lead_score) }}",
+              "rightValue": "={{ Number($(\"Company Settings\").item.json.emergency_score_threshold) }}",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -288,
+        96
+      ],
+      "id": "ed020b18-8e9e-4beb-963d-144f0c32d44c",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3397cb41-125c-440c-84de-e58e6038d82f",
+              "name": "lead_id",
+              "value": "={{ \"RF-\" + $now.toFormat(\"yyyyMMddHHmmss\") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -928,
+        96
+      ],
+      "id": "37e4cfd6-2afa-4740-a26d-ce7a0edb3876",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "id"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Write only the body of the email.\n\nDo NOT include:\n- Subject\n- Greeting\n- Signature\n\nCustomer Name:\n{{ $(\"Quote Request Form\").item.json.name }}\n\nSelected Service:\n{{ $(\"Quote Request Form\").item.json.service_type }}\n\nCustomer Description:\n{{ $(\"Quote Request Form\").item.json.details }}\n\nAI Job Type:\n{{ $(\"Analyze Request\").item.json.output[0].content[0].text.job_type }}\n\nUrgency:\n{{ $(\"Analyze Request\").item.json.output[0].content[0].text.urgency }}\n\nCompany:\n{{ $(\"Company Settings\").item.json.company_name }}\n\nResponse Time:\n{{ $(\"Company Settings\").item.json.response_time }}\n\nCompany Phone:\n{{ $(\"Company Settings\").item.json.company_phone }}\n\nWrite one warm, professional paragraph.\n\nRequirements:\n\n- Thank them for contacting the company.\n- Briefly acknowledge their roofing concern.\n- Mention that their request has been received.\n- Let them know someone from the company will contact them within the configured response time.\n- If urgency is High, advise them to call immediately if conditions worsen.\n- End naturally without a signature."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "instructions": "You are an AI assistant for a professional roofing company.\n\nYour only job is to write a warm, professional follow-up email to the customer.\n\nReturn only the email body.\n\nDo not return JSON.\nDo not summarize the lead.\nDo not classify the job.\nDo not explain your reasoning.",
+          "textFormat": {
+            "textOptions": {
+              "type": "text"
+            }
+          }
+        }
+      },
+      "id": "03bce557-d8f6-4de1-86fc-1c8e353abda3",
+      "name": "AI Follow-up Email",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        -48,
+        80
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "aeehWshP5qvZ5lH7",
+          "name": "OpenAI account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "id"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Customer Name:\n{{ $(\"Quote Request Form\").item.json.name }}\n\nCustomer Selected Service:\n{{ $(\"Quote Request Form\").item.json.service_type }}\n\nCustomer Description:\n{{ $(\"Quote Request Form\").item.json.details }}\n\nAI Job Type:\n{{ $(\"Analyze Request\").item.json.output[0].content[0].text.job_type }}\n\nUrgency:\n{{ $(\"Analyze Request\").item.json.output[0].content[0].text.urgency }}\n\nLead Score:\n{{ $(\"Analyze Request\").item.json.output[0].content[0].text.lead_score }}\n\nInsurance Claim:\n{{ $(\"Analyze Request\").item.json.output[0].content[0].text.insurance_claim }}\n\nCreate sales notes with exactly these headings:\n\nSUMMARY\n\nLIKELY CUSTOMER CONCERN\n\nQUESTIONS TO ASK\n\nINSPECTION CHECKLIST\n\nPOSSIBLE UPSELLS\n\nOBJECTIONS TO EXPECT\n\nNEXT BEST ACTION\n\nKeep it practical"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {
+          "instructions": "You are an experienced roofing sales manager.\n\nYour job is to help a roofing salesperson prepare before calling a customer.\n\nReturn only professional sales notes.\n\nDo not return JSON.",
+          "textFormat": {
+            "textOptions": {
+              "type": "text"
+            }
+          }
+        }
+      },
+      "id": "97d694e8-4933-4d79-9498-e141f6f9db89",
+      "name": "AI Sales Notes",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.3,
+      "position": [
+        -560,
+        96
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "aeehWshP5qvZ5lH7",
+          "name": "OpenAI account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $(\"Company Settings\").item.json.owner_email }}",
+        "subject": "=🚨 EMERGENCY Roofing Job - {{ $('Quote Request Form').item.json.name }}",
+        "message": "=<div style=\"background:#c62828;color:white;padding:22px;text-align:center;font-size:28px;font-weight:bold;\">\n🚨 EMERGENCY ROOFING LEAD\n</div>\n\n<div style=\"padding:20px;font-family:Arial,sans-serif;max-width:700px;\">\n\n<div style=\"background:#ffebee;border:2px solid #c62828;padding:15px;margin-bottom:20px;font-size:18px;\">\n<strong>Immediate Action Recommended</strong><br><br>\n\n{{ $(\"Analyze Request\").item.json.output[0].content[0].text.recommended_action }}\n</div>\n\n<p style=\"font-size:16px;\">\n<strong>Lead ID:</strong>\n{{ $(\"Edit Fields\").item.json.lead_id }}\n</p>\n\n<h2 style=\"color:#c62828;\">⚠ AI Emergency Analysis</h2>\n\n<table width=\"100%\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;border:1px solid #ddd;\">\n\n<tr>\n<td><strong>Summary</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.summary }}</td>\n</tr>\n\n<tr>\n<td><strong>Lead Score</strong></td>\n<td style=\"font-size:22px;font-weight:bold;color:#c62828;\">\n{{ $(\"Analyze Request\").item.json.output[0].content[0].text.lead_score }}/100\n</td>\n</tr>\n\n<tr>\n<td><strong>Urgency</strong></td>\n<td style=\"color:#c62828;font-weight:bold;font-size:20px;\">\n🚨 {{ $(\"Analyze Request\").item.json.output[0].content[0].text.urgency }}\n</td>\n</tr>\n\n<tr>\n<td><strong>Estimated Project Value</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.estimated_project_value }}</td>\n</tr>\n\n<tr>\n<td><strong>Insurance Claim</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.insurance_claim ? \"✅ Likely\" : \"❌ No\" }}</td>\n</tr>\n\n<tr>\n<td><strong>Customer Sentiment</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.customer_sentiment }}</td>\n</tr>\n\n<tr>\n<td><strong>Best Contact Method</strong></td>\n<td>{{ $(\"Analyze Request\").item.json.output[0].content[0].text.ideal_contact_method }}</td>\n</tr>\n\n</table>\n\n<br>\n\n<h2 style=\"color:#c62828;\">📞 Contact Customer Immediately</h2>\n\n<p style=\"font-size:18px;\">\n<strong>{{ $(\"Quote Request Form\").item.json.name }}</strong>\n</p>\n\n<p>\n📧\n<a href=\"mailto:{{ $(\"Quote Request Form\").item.json.email }}\">\n{{ $(\"Quote Request Form\").item.json.email }}\n</a>\n</p>\n\n<p>\n📱\n<a href=\"tel:{{ $(\"Quote Request Form\").item.json.phone }}\">\n{{ $(\"Quote Request Form\").item.json.phone }}\n</a>\n</p>\n\n<p>\n📍\n{{ $(\"Quote Request Form\").item.json.address }}\n</p>\n\n<p>\n🕒\n{{ $(\"Quote Request Form\").item.json.best_time }}\n</p>\n\n<br>\n\n<h2 style=\"color:#c62828;\">Customer Description</h2>\n\n<div style=\"background:#fff8f8;padding:15px;border-left:5px solid #c62828;\">\n{{ $(\"Quote Request Form\").item.json.details }}\n</div>\n\n<br>\n\n<h2 style=\"color:#c62828;\">🤖 AI Sales Notes</h2>\n\n<div style=\"background:#fff8f8;padding:15px;border-left:5px solid #c62828;\">\n<pre style=\"white-space:pre-wrap;font-family:Arial,sans-serif;margin:0;\">{{ $(\"AI Sales Notes\").item.json.output[0].content[0].text }}</pre>\n</div>\n\n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -176,
+        -48
+      ],
+      "id": "a2742448-9e90-4af6-999c-32d69c3edf49",
+      "name": "Emergency Email",
+      "webhookId": "c7b56767-461e-4e8d-b2da-34a135e6e2f1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "xNeh74tInRRKlCYS",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "da476741-10b2-4587-ab38-5e29ce445e4a",
+              "name": "company_name",
+              "value": "Modern Exterior Roofing",
+              "type": "string"
+            },
+            {
+              "id": "e27476e3-87cf-45eb-8367-cbde43674dc8",
+              "name": "owner_email",
+              "value": "red.rojas2007@gmail.com",
+              "type": "string"
+            },
+            {
+              "id": "00b27565-17b8-441f-bd40-eabe278715e7",
+              "name": "reply_to",
+              "value": "info@modernexteriorroofing.com",
+              "type": "string"
+            },
+            {
+              "id": "995df9b7-b277-4cda-803a-d85d797012be",
+              "name": "company_phone",
+              "value": "(414) 555-1234",
+              "type": "string"
+            },
+            {
+              "id": "7b7ff899-7188-4f74-a00a-0dcc0fc3cc18",
+              "name": "company_website",
+              "value": "https://modernexteriorroofing.com",
+              "type": "string"
+            },
+            {
+              "id": "4b3639f6-7464-491a-bdb9-812c644a76eb",
+              "name": "response_time",
+              "value": "within one business day",
+              "type": "string"
+            },
+            {
+              "id": "880fde98-028b-4427-8404-2f2736753de4",
+              "name": "company_signature",
+              "value": "Modern Exterior Roofing Team",
+              "type": "string"
+            },
+            {
+              "id": "4d590d55-2176-4763-8b4c-ec58874c3ebe",
+              "name": "emergency_score_threshold",
+              "value": "80",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -1104,
+        96
+      ],
+      "id": "36c1859f-dc41-4e10-8136-6fbce13a13c6",
+      "name": "Company Settings"
+    }
+  ],
+  "pinData": {
+    "Quote Request Form": [
+      {
+        "json": {
+          "name": "Misael Rojas",
+          "email": "red.rojas2007@gmail.com",
+          "phone": "3333",
+          "address": "17 35 dr",
+          "service_type": "Leak Inspection",
+          "details": "Hi my roof is leaking if you could please send someone down for an estimate today or tommorow would be great",
+          "best_time": "Afternoon (12PM-4PM)",
+          "submittedAt": "2026-08-03T14:54:43.966-05:00",
+          "formMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Quote Request Form": {
+      "main": [
+        [
+          {
+            "node": "Company Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Request": {
+      "main": [
+        [
+          {
+            "node": "AI Sales Notes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Owner": {
+      "main": [
+        [
+          {
+            "node": "AI Follow-up Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Lead": {
+      "main": [
+        [
+          {
+            "node": "Confirm to Customer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Emergency Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Owner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Analyze Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Follow-up Email": {
+      "main": [
+        [
+          {
+            "node": "Log Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Sales Notes": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Emergency Email": {
+      "main": [
+        [
+          {
+            "node": "AI Follow-up Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Company Settings": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "67a3ae6c-27b0-4d5f-8186-f631379fe38a",
+  "meta": {
+    "instanceId": "c0394eeb0b111db474ae3177b9ec3a995ed23e7d3283065d7a654307824a2eda"
+  },
+  "nodeGroups": [],
+  "id": "xLJnVRfUbRdKErGy",
+  "tags": []
+}
