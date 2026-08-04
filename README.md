@@ -18,30 +18,30 @@ An AI-powered roofing lead qualification system built with n8n OpenAI, Gmail, an
 - Gmail API
 - Google Sheets API
 
-## Workflow
+## Workflow Overview
 
-Customer submits a roofing request.
-
-↓
-
-AI analyzes the request.
+📥 Lead Submission
 
 ↓
 
-Lead is scored and prioritized.
+🧠 AI Analysis
 
 ↓
 
-Emergency leads are routed immediately.
+🤖 AI Sales Notes
 
 ↓
 
-Owner receives a detailed email.
+🚨 Emergency Detection
 
 ↓
 
-Customer receives a confirmation email.
+📧 Owner Notification
 
 ↓
 
-Lead is logged to Google Sheets.
+📋 Google Sheets CRM
+
+↓
+
+📨 Customer Confirmation
