@@ -187,3 +187,7 @@ This creates a searchable lead database for the business.
 This project demonstrates how AI and workflow automation can streamline lead management for service-based businesses.
 
 Although built for roofing contractors, the architecture can be adapted to HVAC, plumbing, electrical, landscaping, and other home service industries by updating the Company Settings node and AI prompts.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
