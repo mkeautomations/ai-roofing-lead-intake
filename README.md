@@ -30,15 +30,30 @@ An AI-powered roofing lead qualification system built with n8n OpenAI, Gmail, an
 
 🤖 AI Sales Notes
 
-<img width="877" height="902" alt="Customer Form" src="https://github.com/user-attachments/assets/2022860e-af76-414b-bd87-5f4ef1bf738b" />
-<img width="910" height="597" alt="AI emergency " src="https://github.com/user-attachments/assets/46b31e20-51f2-4d53-8ffa-13047afa412e" />
 <img width="872" height="613" alt="Sales notes 1" src="https://github.com/user-attachments/assets/3f7849c0-7a9e-4b99-98e1-8d4527d9e4c7" />
 <img width="938" height="464" alt="Screenshot 2026-08-03 213652" src="https://github.com/user-attachments/assets/ef3d897b-91fd-4d54-95ba-82f4039e2084" />
 
 
-🚨 Emergency Detection
+### 🚨 Emergency Detection
 
-↓
+The workflow automatically prioritizes urgent roofing requests.
+
+A lead is classified as an emergency when:
+
+- AI classifies the request as **High** urgency
+- Lead score exceeds the configurable emergency threshold
+
+Emergency leads trigger:
+
+- 🚨 Priority owner email
+- AI-generated action plan
+- Immediate customer contact recommendation
+<img width="938" height="464" alt="Screenshot 2026-08-03 213652" src="https://github.com/user-attachments/assets/673497bf-ec88-4c1d-b0a6-0e8c97b3a10d" />
+<img width="782" height="417" alt="Emergency code" src="https://github.com/user-attachments/assets/7c961d58-661b-4297-882c-ecea0452e973" />
+<img width="527" height="437" alt="Emergency json" src="https://github.com/user-attachments/assets/5cd6e5d0-db2e-4058-bdb1-782b2fe68505" />
+<img width="1025" height="568" alt="Screenshot 2026-08-03 214857" src="https://github.com/user-attachments/assets/75a9f9e4-dede-4061-948a-c5fa09bd373c" />
+
+
 
 📧 Owner Notification
 
