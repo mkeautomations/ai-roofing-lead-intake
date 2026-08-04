@@ -1,0 +1,5 @@
+docs/
+├── workflow.json
+├── screenshots/
+├── setup-guide.md
+└── sample-google-sheet.csv
